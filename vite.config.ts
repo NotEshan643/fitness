@@ -8,4 +8,5 @@ export default defineConfig({
     alias: { "@": path.resolve(__dirname, "./src") },
   },
   server: { port: 5180, open: true },
+  build: { chunkSizeWarningLimit: 2000 },
 });
