@@ -57,6 +57,9 @@ On Windows you can also double-click **`START-JARVIS.bat`**.
   list/focus, screenshots, file create/rename/move/delete (recycle bin),
   volume, media keys, system info/process monitor, and lock/sleep/restart/
   shutdown — destructive and power actions are confirmation-gated.
+- **Internet research**: `web_search` + `get_news` (Tavily, with citations) and
+  keyless `fetch_webpage` (fetch + readable-text extraction). The agent chains
+  search→fetch→summarize for multi-step research on its own.
 - Layered **config** (YAML + `.env`) and structured **logging**
 
 > Voice needs the voice extras installed (`pip install -e .[voice]`) and a

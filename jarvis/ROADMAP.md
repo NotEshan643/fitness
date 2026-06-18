@@ -48,10 +48,16 @@ memory-backed, tool-using JARVIS in the terminal (needs `ANTHROPIC_API_KEY`).
 > 26 tools now registered. Windows-specific actions (pycaw volume, power cmds)
 > verified by reading + platform guards; run-test on the user's Windows PC.
 
-## Phase 4 — Internet & agentic research
-- Pluggable web search + page extraction + summarization with citations
-- Multi-step research tasks → structured outputs (notes, spreadsheets)
-- News/market briefings
+## ✅ Phase 4 — Internet & agentic research
+- [x] `web_search` (Tavily) with synthesized answer + sources to cite
+- [x] `get_news` recent-news briefing over a configurable window
+- [x] `fetch_webpage` — keyless fetch + readable-text extraction (trafilatura,
+      with a tag-stripping fallback) so any page can be read/summarized
+- [x] Multi-step research emerges from the agent loop (search → fetch → synthesize)
+- [x] Tests: HTML extraction (scripts/styles/tags removed) + no-key degradation
+
+> Live search needs TAVILY_API_KEY; page fetching works with internet only.
+> Structured outputs (spreadsheets) build on this in a later pass.
 
 ## Phase 5 — Memory intelligence
 - Embeddings + vector recall over long-term memory
