@@ -74,6 +74,23 @@ class UICfg(BaseModel):
     hotkey_toggle: str = "ctrl+alt+j"
 
 
+class MCPServerCfg(BaseModel):
+    """One external MCP server to connect and expose as tools."""
+
+    name: str
+    transport: Literal["stdio", "sse"] = "stdio"
+    command: str = ""                 # stdio: executable
+    args: list[str] = []              # stdio: arguments
+    env: dict[str, str] = {}          # stdio: extra environment
+    url: str = ""                     # sse: server URL
+    enabled: bool = True
+
+
+class IntegrationsCfg(BaseModel):
+    # Add servers like Google Calendar/Drive here; their tools auto-register.
+    mcp_servers: list[MCPServerCfg] = []
+
+
 class Secrets(BaseModel):
     """Read-only view of secrets sourced from the environment / .env."""
 
@@ -110,6 +127,7 @@ class Settings(BaseModel):
     memory: MemoryCfg = MemoryCfg()
     permissions: PermissionsCfg = PermissionsCfg()
     ui: UICfg = UICfg()
+    integrations: IntegrationsCfg = IntegrationsCfg()
     log_level: str = "INFO"
 
     # Populated from env, excluded from any YAML round-trip.

@@ -62,6 +62,11 @@ On Windows you can also double-click **`START-JARVIS.bat`**.
 - **Internet research**: `web_search` + `get_news` (Tavily, with citations) and
   keyless `fetch_webpage` (fetch + readable-text extraction). The agent chains
   search→fetch→summarize for multi-step research on its own.
+- **Spotify**: play tracks/playlists, pause/resume, skip, volume, now-playing
+  ("Jarvis, play my workout playlist").
+- **MCP integrations**: connect Google Calendar/Drive or any MCP server in
+  `settings.integrations.mcp_servers` — their tools become voice-callable, with
+  write actions auto-gated behind confirmation.
 - Layered **config** (YAML + `.env`) and structured **logging**
 
 > Voice needs the voice extras installed (`pip install -e .[voice]`) and a

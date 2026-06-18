@@ -43,3 +43,18 @@ ui:
   theme: ironman
   start_minimized: true
   hotkey_toggle: "ctrl+alt+j"
+
+# External MCP servers. Their tools auto-register and become voice-callable.
+# Examples (uncomment + install the server, requires `pip install mcp`):
+integrations:
+  mcp_servers: []
+  # mcp_servers:
+  #   - name: gcal
+  #     transport: stdio
+  #     command: npx
+  #     args: ["-y", "@modelcontextprotocol/server-google-calendar"]
+  #     env: { GOOGLE_OAUTH_CREDENTIALS: "C:/path/to/credentials.json" }
+  #   - name: gdrive
+  #     transport: stdio
+  #     command: npx
+  #     args: ["-y", "@modelcontextprotocol/server-gdrive"]

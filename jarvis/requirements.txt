@@ -28,8 +28,9 @@ send2trash>=1.8
 trafilatura>=1.8
 tavily-python>=0.3
 
-# --- Spotify (Phase 6) ---
+# --- Spotify & integrations (Phase 6) ---
 spotipy>=2.23
+mcp>=1.0                     # bridge external MCP servers (Calendar/Drive/etc.)
 
 # --- Scheduler (Phase 8) ---
 APScheduler>=3.10

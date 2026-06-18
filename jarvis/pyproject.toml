@@ -24,9 +24,10 @@ voice = ["sounddevice>=0.4.6", "numpy>=1.26", "deepgram-sdk>=3.2",
 desktop = ["psutil>=5.9", "pyautogui>=0.9.54", "mss>=9.0", "send2trash>=1.8"]
 web = ["trafilatura>=1.8", "tavily-python>=0.3"]
 music = ["spotipy>=2.23"]
+integrations = ["mcp>=1.0"]
 ui = ["PySide6>=6.6"]
 memory = ["numpy>=1.26", "sentence-transformers>=2.7"]  # local semantic recall
-full = ["jarvis-assistant[voice,desktop,web,music,ui,memory]", "APScheduler>=3.10"]
+full = ["jarvis-assistant[voice,desktop,web,music,ui,memory,integrations]", "APScheduler>=3.10"]
 
 [project.scripts]
 jarvis = "jarvis.__main__:main"

@@ -71,9 +71,17 @@ memory-backed, tool-using JARVIS in the terminal (needs `ANTHROPIC_API_KEY`).
 > Semantic recall is optional: VOYAGE_API_KEY or `pip install -e .[memory]`.
 > Without either, keyword recall keeps working.
 
-## Phase 6 — Spotify & integrations
-- Full Spotify control (play/pause/skip/volume/playlists, OAuth)
-- Google Calendar / Drive bridges (MCP)
+## ✅ Phase 6 — Spotify & integrations
+- [x] Full Spotify control: play track/playlist, pause/resume, next/previous,
+      volume, now-playing (OAuth via spotipy, cached single controller)
+- [x] Generic MCP bridge: any configured MCP server's tools auto-register
+      (Google Calendar/Drive/etc.) via a sync↔async loop bridge
+- [x] Automatic permission gating of MCP tools (mutating verbs → confirm)
+- [x] Tests: Spotify registration/degradation, MCP risk heuristic, bridge no-op
+      without servers / missing package
+
+> Spotify needs SPOTIFY_CLIENT_ID/SECRET (Premium). MCP servers are configured
+> in settings.integrations.mcp_servers and need `pip install -e .[integrations]`.
 
 ## Phase 7 — HUD dashboard
 - PySide6 Iron-Man HUD: status, mic state, transcript, memory, tasks, sysinfo

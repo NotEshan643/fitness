@@ -14,6 +14,7 @@ from .brain.persona import time_greeting
 from .core.config import Settings, load_settings
 from .core.events import EventBus
 from .core.logging import get_logger, setup_logging
+from .integrations.mcp_bridge import MCPBridge
 from .memory.conversation import ConversationStore
 from .memory.database import Database
 from .memory.embeddings import make_embedder
@@ -41,6 +42,11 @@ class JarvisApp:
         self.audit = AuditLog(self.db)
         self.permissions = PermissionManager(self.settings)
         self.registry = build_default_registry()
+        # Connect any configured MCP servers (Calendar/Drive/etc.) and register
+        # their tools alongside the built-ins.
+        self.mcp = MCPBridge(self.settings)
+        for tool in self.mcp.start():
+            self.registry.add(tool)
         self.llm = LLMClient(self.settings)
         self.extractor = MemoryExtractor(self.settings, self.llm, self.memory)
 
@@ -62,6 +68,10 @@ class JarvisApp:
 
     def shutdown(self) -> None:
         self.conversation.end()
+        try:
+            self.mcp.stop()
+        except Exception:
+            pass
         self.db.close()
 
     # ── Text mode (Phase 1) ────────────────────────────────────────────

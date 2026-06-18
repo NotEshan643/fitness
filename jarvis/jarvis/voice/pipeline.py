@@ -83,10 +83,9 @@ class VoicePipeline:
 
     def _play_highway_to_hell(self) -> None:
         try:
-            from ..tools.spotify import SpotifyController
+            from ..tools.spotify import get_controller
 
-            if self.spotify is None:
-                self.spotify = SpotifyController(self.settings)
+            self.spotify = get_controller(self.settings)
             self.spotify.play_query("Highway to Hell AC/DC")
         except Exception:  # never let music break the ritual
             log.exception("Could not start startup music")
