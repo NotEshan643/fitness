@@ -23,11 +23,18 @@ memory-backed, tool-using JARVIS in the terminal (needs `ANTHROPIC_API_KEY`).
 
 ---
 
-## Phase 2 — Voice (the JARVIS feel)  ⟵ *next, pending approval*
-- Wake word "Wake up Jarvis" (openWakeWord) running in background
-- Streaming STT (Deepgram) + barge-in / interruptible TTS (ElevenLabs British voice)
-- Startup ritual: sound → optional Spotify "Highway to Hell" → time-aware greeting
-- Full hands-free voice loop; adjustable speed/pitch; local fallbacks
+## ✅ Phase 2 — Voice (the JARVIS feel)
+- [x] Wake word "Wake up Jarvis" (openWakeWord, STT-keyword fallback)
+- [x] STT (Deepgram → faster-whisper fallback) behind a provider interface
+- [x] TTS (ElevenLabs British voice → Windows SAPI fallback), speed/pitch, interruptible
+- [x] Audio IO with energy-VAD utterance capture + barge-in playback
+- [x] Startup ritual: synthesized chime → optional Spotify "Highway to Hell" → time-aware greeting
+- [x] Full hands-free pipeline: wake → ritual → listen → reason → speak → sleep
+- [x] Voice-driven confirmation for destructive actions
+- [x] Unit tests (no audio hw needed): chime, fuzzy wake, provider fallbacks
+
+> Audio runtime behavior must be verified on the user's Windows PC (mic/speaker
+> + API keys); logic and fallbacks are import-tested here.
 
 ## Phase 3 — Desktop & system control
 - Open/close apps & games, window management, screenshots

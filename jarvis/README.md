@@ -42,14 +42,21 @@ On Windows you can also double-click **`START-JARVIS.bat`**.
 
 ---
 
-## What works in Phase 1
+## What works now (Phases 1–2)
 - Natural, in-character JARVIS conversation powered by Claude
 - Persistent **memory**: conversation history + long-term facts (SQLite)
 - **Agent loop** with native tool-use (Claude plans and calls tools)
 - **Tools**: remember/recall/search/forget memory, current time, file search/read,
   web-search interface
 - **Security**: permission tiers, confirmation for destructive actions, full audit log
+- **Voice** (run `python -m jarvis`): wake word "Wake up Jarvis", startup ritual
+  (chime → optional Spotify "Highway to Hell" → spoken greeting), hands-free
+  listen→reason→speak loop, interruptible British TTS, voice confirmations.
+  Cloud providers (ElevenLabs/Deepgram) with offline fallbacks (SAPI/Whisper).
 - Layered **config** (YAML + `.env`) and structured **logging**
+
+> Voice needs the voice extras installed (`pip install -e .[voice]`) and a
+> microphone. Without them, JARVIS automatically runs in text mode.
 
 ## Project layout
 ```
