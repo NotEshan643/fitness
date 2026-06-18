@@ -1,0 +1,45 @@
+# JARVIS configuration. Copy to settings.yaml and edit. Secrets go in .env.
+
+assistant:
+  name: JARVIS
+  address_user_as: Sir
+  greeting_style: classic        # classic | brief | playful
+  personality: witty
+
+wake:
+  enabled: true
+  phrase: "wake up jarvis"
+  sensitivity: 0.6
+
+startup:
+  sound: true
+  play_highway_to_hell: false
+  greet: true
+
+voice:
+  tts_provider: elevenlabs       # elevenlabs | sapi
+  stt_provider: deepgram         # deepgram | whisper
+  voice_id: ""                   # provider voice id (British). blank = default
+  speed: 1.0
+  pitch: 1.0
+  interruptible: true
+
+brain:
+  model: claude-opus-4-8
+  max_tool_steps: 12
+  temperature: 0.7
+  history_turns: 20
+
+memory:
+  autoextract: true
+  max_recall: 8
+
+permissions:
+  confirm_destructive: true
+  confirm_sensitive: true
+  allow_shutdown: true
+
+ui:
+  theme: ironman
+  start_minimized: true
+  hotkey_toggle: "ctrl+alt+j"

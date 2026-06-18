@@ -1,0 +1,36 @@
+# --- Core (Phase 1) ---
+anthropic>=0.40.0
+pydantic>=2.6
+pyyaml>=6.0
+python-dotenv>=1.0
+httpx>=0.27
+rich>=13.7
+
+# --- Voice (Phase 2) ---
+sounddevice>=0.4.6
+numpy>=1.26
+openwakeword>=0.6.0 ; platform_system != "Darwin"
+deepgram-sdk>=3.2
+elevenlabs>=1.0
+faster-whisper>=1.0          # local STT fallback
+pyttsx3>=2.90                # local TTS fallback (Windows SAPI)
+
+# --- Desktop & system control (Phase 3) ---
+psutil>=5.9
+pyautogui>=0.9.54
+pygetwindow>=0.0.9 ; platform_system == "Windows"
+mss>=9.0
+pycaw>=20240210 ; platform_system == "Windows"
+
+# --- Web research (Phase 4) ---
+trafilatura>=1.8
+tavily-python>=0.3
+
+# --- Spotify (Phase 6) ---
+spotipy>=2.23
+
+# --- Scheduler (Phase 8) ---
+APScheduler>=3.10
+
+# --- UI (Phase 7) ---
+PySide6>=6.6
