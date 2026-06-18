@@ -36,11 +36,17 @@ memory-backed, tool-using JARVIS in the terminal (needs `ANTHROPIC_API_KEY`).
 > Audio runtime behavior must be verified on the user's Windows PC (mic/speaker
 > + API keys); logic and fallbacks are import-tested here.
 
-## Phase 3 — Desktop & system control
-- Open/close apps & games, window management, screenshots
-- File ops (create/rename/move/delete/search) — all confirm-gated
-- Volume, media keys, lock / sleep / restart / shutdown (sensitive-gated)
-- Running-process monitoring
+## ✅ Phase 3 — Desktop & system control
+- [x] Open/launch apps & games, close processes, open websites (cross-platform)
+- [x] Window management (list/focus) and screen capture
+- [x] File ops: create/rename/move/delete — confirm-gated, delete to recycle bin
+- [x] Volume, media keys (play/pause/next/prev/mute)
+- [x] Lock (confirm) and sleep/restart/shutdown (sensitive + allow_shutdown gate)
+- [x] System info + top-process monitoring (psutil)
+- [x] Tests: file-op lifecycle on disk + destructive/power permission gating
+
+> 26 tools now registered. Windows-specific actions (pycaw volume, power cmds)
+> verified by reading + platform guards; run-test on the user's Windows PC.
 
 ## Phase 4 — Internet & agentic research
 - Pluggable web search + page extraction + summarization with citations

@@ -40,10 +40,26 @@ class ToolRegistry:
 
 def build_default_registry() -> ToolRegistry:
     """Register every tool available in the current phase."""
-    from . import datetime_tool, files, memory_tools, web
+    from . import (
+        datetime_tool,
+        desktop,
+        file_ops,
+        files,
+        memory_tools,
+        system,
+        web,
+    )
 
     reg = ToolRegistry()
-    for module in (memory_tools, files, datetime_tool, web):
+    for module in (
+        memory_tools,
+        files,
+        file_ops,
+        datetime_tool,
+        desktop,
+        system,
+        web,
+    ):
         module.register(reg)
-    log.info("Registered tools: %s", ", ".join(reg.names()))
+    log.info("Registered %d tools: %s", len(reg.names()), ", ".join(reg.names()))
     return reg

@@ -42,8 +42,9 @@ class PermissionManager:
         if risk == RiskLevel.SAFE:
             return
 
-        if risk == RiskLevel.SENSITIVE and not self.cfg.allow_shutdown and "shutdown" in tool:
-            raise PermissionError(f"{tool} is disabled in settings, Sir.")
+        # Power actions (shutdown/restart/sleep) can be disabled entirely.
+        if risk == RiskLevel.SENSITIVE and not self.cfg.allow_shutdown and tool.endswith("_pc"):
+            raise PermissionError(f"Power actions are disabled in settings, Sir.")
 
         needs = (
             (risk == RiskLevel.CONFIRM and self.cfg.confirm_destructive)

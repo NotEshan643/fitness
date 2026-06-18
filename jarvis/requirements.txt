@@ -21,6 +21,8 @@ pyautogui>=0.9.54
 pygetwindow>=0.0.9 ; platform_system == "Windows"
 mss>=9.0
 pycaw>=20240210 ; platform_system == "Windows"
+comtypes>=1.2 ; platform_system == "Windows"
+send2trash>=1.8
 
 # --- Web research (Phase 4) ---
 trafilatura>=1.8

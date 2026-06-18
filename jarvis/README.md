@@ -53,6 +53,10 @@ On Windows you can also double-click **`START-JARVIS.bat`**.
   (chime → optional Spotify "Highway to Hell" → spoken greeting), hands-free
   listen→reason→speak loop, interruptible British TTS, voice confirmations.
   Cloud providers (ElevenLabs/Deepgram) with offline fallbacks (SAPI/Whisper).
+- **Desktop & system control**: open/close apps & games, open websites, window
+  list/focus, screenshots, file create/rename/move/delete (recycle bin),
+  volume, media keys, system info/process monitor, and lock/sleep/restart/
+  shutdown — destructive and power actions are confirmation-gated.
 - Layered **config** (YAML + `.env`) and structured **logging**
 
 > Voice needs the voice extras installed (`pip install -e .[voice]`) and a
