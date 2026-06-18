@@ -59,10 +59,17 @@ memory-backed, tool-using JARVIS in the terminal (needs `ANTHROPIC_API_KEY`).
 > Live search needs TAVILY_API_KEY; page fetching works with internet only.
 > Structured outputs (spreadsheets) build on this in a later pass.
 
-## Phase 5 — Memory intelligence
-- Embeddings + vector recall over long-term memory
-- Automatic fact extraction from conversations
-- Memory review/merge UI
+## ✅ Phase 5 — Memory intelligence
+- [x] Pluggable embeddings (Voyage AI → local sentence-transformers → none)
+- [x] Semantic recall via brute-force cosine over the BLOB column; keyword (FTS)
+      fallback when no embedder; backfill of pre-existing memories on startup
+- [x] Per-turn relevant-memory injection (semantic when available)
+- [x] Automatic fact extraction (background, cheap model) with dedup
+- [x] Tests: semantic ranking, near-duplicate detection, extractor + dedup
+- [ ] Memory review/merge UI → folds into Phase 7 (HUD)
+
+> Semantic recall is optional: VOYAGE_API_KEY or `pip install -e .[memory]`.
+> Without either, keyword recall keeps working.
 
 ## Phase 6 — Spotify & integrations
 - Full Spotify control (play/pause/skip/volume/playlists, OAuth)

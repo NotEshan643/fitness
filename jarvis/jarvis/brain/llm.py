@@ -45,12 +45,17 @@ class LLMClient:
         system: str,
         messages: list[dict[str, Any]],
         tools: list[dict[str, Any]] | None = None,
+        model: str | None = None,
     ):
-        """One turn of the Messages API. Returns the raw response object."""
+        """One turn of the Messages API. Returns the raw response object.
+
+        ``model`` overrides the default brain model (e.g. a cheaper model for
+        background tasks like memory extraction).
+        """
         b = self.settings.brain
         try:
             return self.client.messages.create(
-                model=b.model,
+                model=model or b.model,
                 max_tokens=b.max_tokens,
                 temperature=b.temperature,
                 system=system,

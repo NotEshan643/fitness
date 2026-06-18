@@ -50,6 +50,7 @@ class VoiceCfg(BaseModel):
 
 class BrainCfg(BaseModel):
     model: str = "claude-opus-4-8"
+    extract_model: str = "claude-haiku-4-5-20251001"  # cheap model for memory extraction
     max_tool_steps: int = Field(12, ge=1, le=50)
     temperature: float = Field(0.7, ge=0.0, le=1.0)
     history_turns: int = Field(20, ge=0, le=200)
@@ -80,6 +81,7 @@ class Secrets(BaseModel):
     elevenlabs_api_key: str = ""
     deepgram_api_key: str = ""
     tavily_api_key: str = ""
+    voyage_api_key: str = ""
     spotify_client_id: str = ""
     spotify_client_secret: str = ""
     spotify_redirect_uri: str = "http://localhost:8888/callback"
@@ -92,6 +94,7 @@ class Secrets(BaseModel):
             elevenlabs_api_key=g("ELEVENLABS_API_KEY", ""),
             deepgram_api_key=g("DEEPGRAM_API_KEY", ""),
             tavily_api_key=g("TAVILY_API_KEY", ""),
+            voyage_api_key=g("VOYAGE_API_KEY", ""),
             spotify_client_id=g("SPOTIFY_CLIENT_ID", ""),
             spotify_client_secret=g("SPOTIFY_CLIENT_SECRET", ""),
             spotify_redirect_uri=g("SPOTIFY_REDIRECT_URI", "http://localhost:8888/callback"),

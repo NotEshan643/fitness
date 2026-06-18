@@ -44,7 +44,9 @@ On Windows you can also double-click **`START-JARVIS.bat`**.
 
 ## What works now (Phases 1–2)
 - Natural, in-character JARVIS conversation powered by Claude
-- Persistent **memory**: conversation history + long-term facts (SQLite)
+- Persistent **memory**: conversation history + long-term facts (SQLite), with
+  **semantic recall** (embeddings, optional) and **automatic fact extraction**
+  so JARVIS quietly learns your preferences/goals over time
 - **Agent loop** with native tool-use (Claude plans and calls tools)
 - **Tools**: remember/recall/search/forget memory, current time, file search/read,
   web-search interface

@@ -16,6 +16,8 @@ from .core.events import EventBus
 from .core.logging import get_logger, setup_logging
 from .memory.conversation import ConversationStore
 from .memory.database import Database
+from .memory.embeddings import make_embedder
+from .memory.extractor import MemoryExtractor
 from .memory.longterm import LongTermMemory
 from .security.audit import AuditLog
 from .security.permissions import PermissionManager
@@ -32,12 +34,15 @@ class JarvisApp:
         # Shared services
         self.events = EventBus()
         self.db = Database()
-        self.memory = LongTermMemory(self.db)
+        self.embedder = make_embedder(self.settings)
+        self.memory = LongTermMemory(self.db, embedder=self.embedder)
+        self.memory.embed_missing()  # backfill if semantic mode was just enabled
         self.conversation = ConversationStore(self.db)
         self.audit = AuditLog(self.db)
         self.permissions = PermissionManager(self.settings)
         self.registry = build_default_registry()
         self.llm = LLMClient(self.settings)
+        self.extractor = MemoryExtractor(self.settings, self.llm, self.memory)
 
         self.agent = Agent(
             settings=self.settings,
@@ -48,6 +53,7 @@ class JarvisApp:
             permissions=self.permissions,
             audit=self.audit,
             events=self.events,
+            extractor=self.extractor,
         )
 
     @property

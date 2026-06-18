@@ -41,6 +41,7 @@ class Agent:
         permissions: PermissionManager,
         audit: AuditLog,
         events: EventBus,
+        extractor=None,
     ) -> None:
         self.settings = settings
         self.llm = llm
@@ -50,10 +51,12 @@ class Agent:
         self.permissions = permissions
         self.audit = audit
         self.events = events
+        self.extractor = extractor
 
     # ── context assembly ───────────────────────────────────────────────
-    def _system_prompt(self) -> str:
-        mems = self.memory.recall(self.settings.memory.max_recall)
+    def _system_prompt(self, query: str = "") -> str:
+        # Inject the memories most relevant to this turn (semantic when enabled).
+        mems = self.memory.relevant(query, self.settings.memory.max_recall)
         block = "\n".join(f"- {m.render()}" for m in mems)
         return build_system_prompt(self.settings, block)
 
@@ -68,7 +71,7 @@ class Agent:
         self.conversation.add("user", user_text)
         self.events.emit("transcript", role="user", text=user_text)
 
-        system = self._system_prompt()
+        system = self._system_prompt(user_text)
         messages = self._history()  # already includes the user turn we just added
         ctx = ToolContext(
             settings=self.settings, memory=self.memory, events=self.events
@@ -82,6 +85,10 @@ class Agent:
 
         self.conversation.add("assistant", reply)
         self.events.emit("transcript", role="assistant", text=reply)
+
+        # Quietly distill durable facts from this exchange (background).
+        if self.extractor is not None:
+            self.extractor.maybe_extract(user_text, reply)
         return reply
 
     def _run_loop(

@@ -32,6 +32,7 @@ All values are validated by pydantic models in `jarvis/core/config.py`.
 
 ## Brain
 | `brain.model` | `claude-opus-4-8` | Claude model id |
+| `brain.extract_model` | `claude-haiku-4-5-...` | Cheap model for memory extraction |
 | `brain.max_tool_steps` | `12` | Agent loop step cap |
 | `brain.temperature` | `0.7` | Sampling temperature |
 | `brain.history_turns` | `20` | Recent turns injected as context |
@@ -52,4 +53,5 @@ All values are validated by pydantic models in `jarvis/core/config.py`.
 
 ## Secrets (`.env`)
 `ANTHROPIC_API_KEY`, `ELEVENLABS_API_KEY`, `DEEPGRAM_API_KEY`,
-`SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `TAVILY_API_KEY`.
+`SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `TAVILY_API_KEY`,
+`VOYAGE_API_KEY` (optional, semantic memory).
