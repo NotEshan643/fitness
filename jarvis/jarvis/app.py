@@ -115,3 +115,14 @@ class JarvisApp:
             self.run_text()
             return
         VoicePipeline(self).run()
+
+    # ── HUD dashboard (Phase 7) ────────────────────────────────────────
+    def run_ui(self) -> None:
+        try:
+            from .ui.tray import run_dashboard
+        except Exception as exc:
+            log.warning("HUD unavailable (%s); install the 'ui' extra.", exc)
+            print("\n  The HUD needs PySide6 (pip install -e .[ui]).\n  Running text mode.\n")
+            self.run_text()
+            return
+        run_dashboard(self)

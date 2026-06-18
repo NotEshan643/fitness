@@ -83,9 +83,17 @@ memory-backed, tool-using JARVIS in the terminal (needs `ANTHROPIC_API_KEY`).
 > Spotify needs SPOTIFY_CLIENT_ID/SECRET (Premium). MCP servers are configured
 > in settings.integrations.mcp_servers and need `pip install -e .[integrations]`.
 
-## Phase 7 — HUD dashboard
-- PySide6 Iron-Man HUD: status, mic state, transcript, memory, tasks, sysinfo
-- System tray, hotkeys, notifications
+## ✅ Phase 7 — HUD dashboard
+- [x] PySide6 Iron-Man HUD: status/mic state, live transcript (+ text input),
+      memory browser/editor, tool/activity feed, live system info
+- [x] Thread-safe event-bus → Qt-signal bridge (worker threads update the GUI)
+- [x] System tray (painted arc-reactor icon) with show/hide + power-down;
+      optional background voice loop; `python -m jarvis --ui`
+- [x] Qt-free theme layer (palette + QSS) with tests
+- [ ] Global OS hotkey toggle → Phase 8 (needs platform hook)
+
+> HUD needs the `ui` extra (PySide6). Rendering is verified on the user's PC;
+> logic/theme are import- and unit-tested headless here.
 
 ## Phase 8 — Automation & hardening
 - Recurring tasks (morning briefing, reminders) via scheduler

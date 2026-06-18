@@ -36,7 +36,8 @@ gracefully without them.
 ### 3. Run
 ```bash
 python -m jarvis --text       # text conversation (works now)
-python -m jarvis              # full voice mode (Phase 2+)
+python -m jarvis --ui         # Iron-Man HUD dashboard + system tray
+python -m jarvis              # full hands-free voice mode
 ```
 On Windows you can also double-click **`START-JARVIS.bat`**.
 
@@ -67,6 +68,9 @@ On Windows you can also double-click **`START-JARVIS.bat`**.
 - **MCP integrations**: connect Google Calendar/Drive or any MCP server in
   `settings.integrations.mcp_servers` — their tools become voice-callable, with
   write actions auto-gated behind confirmation.
+- **HUD dashboard** (`--ui`): dark Iron-Man interface with live status, mic
+  state, transcript + text input, memory browser/editor, activity feed and
+  system info, plus a system-tray presence.
 - Layered **config** (YAML + `.env`) and structured **logging**
 
 > Voice needs the voice extras installed (`pip install -e .[voice]`) and a
