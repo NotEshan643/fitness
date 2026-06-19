@@ -65,3 +65,16 @@ CREATE TABLE IF NOT EXISTS audit_log (
     level    TEXT NOT NULL DEFAULT 'info'   -- info | warning | error
 );
 CREATE INDEX IF NOT EXISTS idx_audit_ts ON audit_log(ts);
+
+-- ── Scheduled tasks (recurring jobs) ──────────────────────────────────
+CREATE TABLE IF NOT EXISTS scheduled_tasks (
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    name       TEXT NOT NULL,
+    prompt     TEXT NOT NULL,             -- instruction handed to the agent
+    trigger    TEXT NOT NULL,             -- cron | interval
+    schedule   TEXT NOT NULL,             -- JSON trigger kwargs
+    enabled    INTEGER NOT NULL DEFAULT 1,
+    speak      INTEGER NOT NULL DEFAULT 1,
+    created_at TEXT NOT NULL,
+    last_run   TEXT
+);

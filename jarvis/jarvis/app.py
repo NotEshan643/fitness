@@ -20,6 +20,7 @@ from .memory.database import Database
 from .memory.embeddings import make_embedder
 from .memory.extractor import MemoryExtractor
 from .memory.longterm import LongTermMemory
+from .scheduler.tasks import TaskScheduler
 from .security.audit import AuditLog
 from .security.permissions import PermissionManager
 from .tools.registry import build_default_registry
@@ -62,16 +63,22 @@ class JarvisApp:
             extractor=self.extractor,
         )
 
+        # Recurring task scheduler; expose it to the scheduling tools.
+        self.scheduler = TaskScheduler(self)
+        self.scheduler.start()
+        self.agent.tool_extras["scheduler"] = self.scheduler
+
     @property
     def greeting(self) -> str:
         return time_greeting(self.settings)
 
     def shutdown(self) -> None:
         self.conversation.end()
-        try:
-            self.mcp.stop()
-        except Exception:
-            pass
+        for closer in (self.scheduler.stop, self.mcp.stop):
+            try:
+                closer()
+            except Exception:
+                pass
         self.db.close()
 
     # ── Text mode (Phase 1) ────────────────────────────────────────────

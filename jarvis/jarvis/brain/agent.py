@@ -52,6 +52,8 @@ class Agent:
         self.audit = audit
         self.events = events
         self.extractor = extractor
+        # Extra services exposed to tools (e.g. the scheduler), injected by app.
+        self.tool_extras: dict = {}
 
     # ── context assembly ───────────────────────────────────────────────
     def _system_prompt(self, query: str = "") -> str:
@@ -74,7 +76,8 @@ class Agent:
         system = self._system_prompt(user_text)
         messages = self._history()  # already includes the user turn we just added
         ctx = ToolContext(
-            settings=self.settings, memory=self.memory, events=self.events
+            settings=self.settings, memory=self.memory, events=self.events,
+            extras=self.tool_extras,
         )
 
         try:

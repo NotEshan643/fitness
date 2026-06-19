@@ -46,6 +46,7 @@ def build_default_registry() -> ToolRegistry:
         file_ops,
         files,
         memory_tools,
+        scheduler_tools,
         spotify,
         system,
         web,
@@ -61,6 +62,7 @@ def build_default_registry() -> ToolRegistry:
         system,
         web,
         spotify,
+        scheduler_tools,
     ):
         module.register(reg)
     log.info("Registered %d tools: %s", len(reg.names()), ", ".join(reg.names()))

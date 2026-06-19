@@ -70,8 +70,22 @@ On Windows you can also double-click **`START-JARVIS.bat`**.
   write actions auto-gated behind confirmation.
 - **HUD dashboard** (`--ui`): dark Iron-Man interface with live status, mic
   state, transcript + text input, memory browser/editor, activity feed and
-  system info, plus a system-tray presence.
+  system info, system-tray presence, and a global hotkey to toggle it.
+- **Automation**: recurring tasks (morning briefing, reminders, news summaries)
+  via the scheduler — created by voice and persisted across restarts.
 - Layered **config** (YAML + `.env`) and structured **logging**
+
+## Tests
+```bash
+cd jarvis
+for t in tests/test_*.py; do PYTHONPATH=. python "$t"; done
+```
+Every phase ships tests that run without API keys or audio hardware (fakes for
+the LLM/embeddings; logic and fallbacks covered).
+
+## Packaging
+See [`PACKAGING.md`](PACKAGING.md) for building a standalone Windows `.exe`
+(PyInstaller) and launching JARVIS on login.
 
 > Voice needs the voice extras installed (`pip install -e .[voice]`) and a
 > microphone. Without them, JARVIS automatically runs in text mode.

@@ -95,9 +95,19 @@ memory-backed, tool-using JARVIS in the terminal (needs `ANTHROPIC_API_KEY`).
 > HUD needs the `ui` extra (PySide6). Rendering is verified on the user's PC;
 > logic/theme are import- and unit-tested headless here.
 
-## Phase 8 — Automation & hardening
-- Recurring tasks (morning briefing, reminders) via scheduler
-- Packaging (PyInstaller), autostart, settings UI, tests, error reporting
+## ✅ Phase 8 — Automation & hardening
+- [x] Recurring tasks via APScheduler, persisted in SQLite and reloaded on start
+- [x] Jobs run through the Agent and announce results (spoken + HUD notify)
+- [x] schedule_task / list_tasks / cancel_task tools (voice-schedulable)
+- [x] Global hotkey to toggle the HUD (pynput, optional)
+- [x] Packaging + autostart guide (PACKAGING.md: PyInstaller, Startup/Task Scheduler)
+- [x] Test suite across all 8 phases (38 tools registered)
+
+---
+
+## 🎉 All planned phases complete
+Future polish (not blocking): vector memory UI, streaming STT partials, richer
+HUD widgets, error reporting/telemetry, more first-party integrations.
 
 ---
 

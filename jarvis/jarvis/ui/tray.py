@@ -11,7 +11,7 @@ from __future__ import annotations
 import threading
 from typing import TYPE_CHECKING
 
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QObject, Signal
 from PySide6.QtGui import QAction, QColor, QIcon, QPainter, QPixmap
 from PySide6.QtWidgets import QApplication, QMenu, QSystemTrayIcon
 
@@ -71,6 +71,8 @@ def run_dashboard(app: "JarvisApp") -> int:
     )
     tray.show()
 
+    _register_hotkey(app, toggle)
+
     if not app.settings.ui.start_minimized:
         window.show()
 
@@ -79,6 +81,43 @@ def run_dashboard(app: "JarvisApp") -> int:
     _maybe_start_voice(app)
 
     return qapp.exec()
+
+
+class _HotkeySignal(QObject):
+    triggered = Signal()
+
+
+def _register_hotkey(app: "JarvisApp", toggle) -> None:
+    """Optional global hotkey (pynput) to show/hide the HUD.
+
+    The OS listener runs on its own thread, so it emits a Qt signal to perform
+    the toggle on the GUI thread.
+    """
+    combo = app.settings.ui.hotkey_toggle
+    if not combo:
+        return
+    try:
+        from pynput import keyboard
+    except Exception:
+        log.info("Global hotkey unavailable (install pynput to enable %s)", combo)
+        return
+
+    signal = _HotkeySignal()
+    signal.triggered.connect(toggle)
+    app._hotkey_signal = signal  # keep a reference alive
+
+    # "ctrl+alt+j" → pynput's "<ctrl>+<alt>+j"
+    spec = "+".join(
+        f"<{p}>" if p in {"ctrl", "alt", "shift", "cmd"} else p
+        for p in combo.lower().split("+")
+    )
+    try:
+        listener = keyboard.GlobalHotKeys({spec: signal.triggered.emit})
+        listener.daemon = True
+        listener.start()
+        log.info("Global hotkey registered: %s", combo)
+    except Exception:
+        log.warning("Could not register hotkey %s", combo)
 
 
 def _maybe_start_voice(app: "JarvisApp") -> None:
